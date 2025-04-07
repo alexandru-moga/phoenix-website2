@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Phoenix Coding Club</title>
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="https://css.hackclub.com/theme.css">
+  <link rel="stylesheet" href="https://css.hackclub.com/fonts.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="https://hackclub.com/" class="flag">
+    <img src="https://assets.hackclub.com/flag-orpheus-left.svg" alt="Hack Club" />
+  </a>
+
+  <div class="particles-container">
+    <canvas id="particles"></canvas>
+  </div>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo-container">
+        <img src="assets/phoenix-logo.svg" alt="Phoenix Club" id="logo">
+        <span>Phoenix Club</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="https://hcb.hackclub.com/phoenix" target="_blank">Finances</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="language-toggle">
+        <span>EN</span>
+        <label class="switch">
+          <input type="checkbox" id="languageToggle">
+          <span class="slider"></span>
+        </label>
+        <span>RO</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="projects-hero">
+      <div class="container">
+        <h1>Build Something Amazing</h1>
+        <p class="subtitle">Create with code, earn awesome rewards</p>
+      </div>
+    </section>
+
+    <section class="project-grid-section">
+      <div class="container">
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="current">Current</button>
+          <button class="filter-btn" data-filter="past">Past</button>
+          <button class="filter-btn" data-filter="future">Upcoming</button>
+        </div>
+
+        <div class="project-grid">
+          <!-- Current Projects -->
+          <article class="project-card current">
+            <div class="project-image">
+              <img src="https://bakebuild.hackclub.com/images/bakebuild-logo.png" alt="Bakebuild">
+            </div>
+            <div class="project-content">
+              <span class="project-status current">Active</span>
+              <h3>Bakebuild & Swirl</h3>
+              <p>Building automated deployment pipelines with Hack Club's bake system</p>
+              <div class="project-meta">
+                <span class="project-type">YSWS Program</span>
+                <a href="https://bake.hackclub.com" class="button">View Project</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Past Projects -->
+          <article class="project-card past">
+            <div class="project-image">
+              <img src="https://assets.hackclub.com/sprig.png" alt="Sprig">
+            </div>
+            <div class="project-content">
+              <span class="project-status past">Completed</span>
+              <h3>Hackaccino & Boba</h3>
+              <p>Created 3D web experiences in exchange for tasty rewards</p>
+              <div class="project-meta">
+                <span class="project-type">YSWS Program</span>
+                <a href="https://hackclub.com/workshops" class="button">View Gallery</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Future Projects -->
+          <article class="project-card future">
+            <div class="project-image">
+              <img src="https://assets.hackclub.com/onboard.png" alt="Onboard">
+            </div>
+            <div class="project-content">
+              <span class="project-status future">Coming Soon</span>
+              <h3>Onboard & Infill</h3>
+              <p>Next-gen member onboarding system with 3D printing rewards</p>
+              <div class="project-meta">
+                <span class="project-type">YSWS Program</span>
+                <a href="#" class="button">Preview</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Add more project cards following the same structure -->
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Ship Your Project?</h2>
+        <p>Follow these steps to get started:</p>
+        <div class="process-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Build Something</h3>
+            <p>Create a project using any technology stack</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Share Your Work</h3>
+            <p>Post in #scrapbook on our Slack</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Get Rewards</h3>
+            <p>Receive awesome Hack Club swag</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

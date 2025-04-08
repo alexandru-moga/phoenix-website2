@@ -1,4 +1,3 @@
-/* Base Styles */
 :root {
     --primary: #ec3750;
     --secondary: #ff8c37;
@@ -28,7 +27,6 @@
     padding: 0 1.5rem;
   }
   
-  /* Hack Club Flag */
   .flag {
     position: fixed;
     top: 0;
@@ -42,7 +40,6 @@
     height: auto;
   }
   
-  /* Particle Background */
   .particles-container {
     position: fixed;
     top: 0;
@@ -58,7 +55,6 @@
     height: 100%;
   }
   
-  /* Header & Navigation */
   header {
     padding: 1.5rem 0;
     background-color: rgba(18, 18, 23, 0.8);
@@ -121,7 +117,6 @@
     border-color: var(--primary);
   }
   
-  /* Hero Section */
   .hero {
     padding: 6rem 0 4rem;
     text-align: center;
@@ -142,7 +137,6 @@
     margin-bottom: 2rem;
   }
   
-/* Language Toggle */
 .language-toggle {
   position: fixed;
   top: 1rem;
@@ -198,8 +192,6 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-  
-  /* Sections */
   section {
     padding: 4rem 0;
   }
@@ -223,7 +215,6 @@ input:checked + .slider:before {
     margin: 0 auto 2rem;
   }
   
-  /* Card Grids */
   .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -261,7 +252,6 @@ input:checked + .slider:before {
     margin-top: 1rem;
   }
   
-  /* Buttons */
   .buttons {
     display: flex;
     gap: 1rem;
@@ -295,7 +285,6 @@ input:checked + .slider:before {
     background-color: rgba(236, 55, 80, 0.1);
   }
   
-  /* Page Headers */
   .page-header {
     padding: 6rem 0 3rem;
     text-align: center;
@@ -310,7 +299,6 @@ input:checked + .slider:before {
     color: transparent;
   }
   
-  /* Projects Section */
   .project-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -361,7 +349,6 @@ input:checked + .slider:before {
     margin-bottom: 1.5rem;
   }
   
-  /* Team Members */
   .member-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -419,7 +406,6 @@ input:checked + .slider:before {
     background-color: rgba(255, 255, 255, 0.2);
   }
   
-  /* Contact Form */
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -484,7 +470,6 @@ input:checked + .slider:before {
     border-color: var(--primary);
   }
   
-  /* FAQ Section */
   .faq {
     max-width: 800px;
     margin: 0 auto;
@@ -499,7 +484,6 @@ input:checked + .slider:before {
     margin-bottom: 0.5rem;
   }
   
-  /* Join Us Section */
   .join-us {
     text-align: center;
     background-color: var(--elevated);
@@ -514,7 +498,6 @@ input:checked + .slider:before {
     margin: 0 auto 2rem;
   }
   
-  /* Footer */
   footer {
     background-color: var(--elevated);
     padding: 4rem 0 2rem;
@@ -574,7 +557,6 @@ input:checked + .slider:before {
     color: var(--subtle);
   }
   
-  /* Responsive Styles */
   @media (max-width: 992px) {
     .hero h1 {
       font-size: 2.5rem;
@@ -673,7 +655,6 @@ input:checked + .slider:before {
     color: var(--black);
   }
 
-  /* Projects Page */
 .projects-hero {
   padding: 8rem 0 4rem;
   text-align: center;
@@ -801,7 +782,6 @@ input:checked + .slider:before {
   margin: 0 auto 1rem;
 }
 
-/* Projects Timeline */
 .project-timeline {
   padding: 4rem 0;
 }
@@ -881,7 +861,6 @@ input:checked + .slider:before {
   font-size: 0.875rem;
 }
 
-/* Color Variables */
 :root {
   --orange: #ff8c37;
   --green: #33d6a6;

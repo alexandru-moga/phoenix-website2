@@ -4,24 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects | Phoenix Coding Club</title>
-  <link rel="icon" href="assets/favicon.ico">
   <link rel="stylesheet" href="https://css.hackclub.com/theme.css">
   <link rel="stylesheet" href="https://css.hackclub.com/fonts.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a href="https://hackclub.com/" class="flag">
+  <a href="https://hackclub.com" class="flag">
     <img src="https://assets.hackclub.com/flag-orpheus-left.svg" alt="Hack Club" />
   </a>
-
-  <div class="particles-container">
-    <canvas id="particles"></canvas>
-  </div>
 
   <header>
     <div class="container">
       <a href="index.html" class="logo-container">
-        <img src="assets/phoenix-logo.svg" alt="Phoenix Club" id="logo">
+        <img src="images/logo.png" alt="Phoenix Club" id="logo">
         <span>Phoenix Club</span>
       </a>
       <nav>
@@ -47,94 +42,118 @@
   <main>
     <section class="projects-hero">
       <div class="container">
-        <h1>Build Something Amazing</h1>
-        <p class="subtitle">Create with code, earn awesome rewards</p>
+        <h1>Our Project Timeline</h1>
+        <p class="subtitle">Building the future with Hack Club's programs</p>
       </div>
     </section>
-
-    <section class="project-grid-section">
+    <section class="project-timeline">
       <div class="container">
-        <div class="project-filters">
-          <button class="filter-btn active" data-filter="all">All Projects</button>
-          <button class="filter-btn" data-filter="current">Current</button>
-          <button class="filter-btn" data-filter="past">Past</button>
-          <button class="filter-btn" data-filter="future">Upcoming</button>
-        </div>
-
-        <div class="project-grid">
-          <!-- Current Projects -->
-          <article class="project-card current">
-            <div class="project-image">
-              <img src="https://bakebuild.hackclub.com/images/bakebuild-logo.png" alt="Bakebuild">
-            </div>
-            <div class="project-content">
-              <span class="project-status current">Active</span>
-              <h3>Bakebuild & Swirl</h3>
-              <p>Building automated deployment pipelines with Hack Club's bake system</p>
-              <div class="project-meta">
-                <span class="project-type">YSWS Program</span>
-                <a href="https://bake.hackclub.com" class="button">View Project</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Past Projects -->
+        <div class="timeline-grid">
           <article class="project-card past">
-            <div class="project-image">
-              <img src="https://assets.hackclub.com/sprig.png" alt="Sprig">
-            </div>
-            <div class="project-content">
+            <div class="project-header">
               <span class="project-status past">Completed</span>
-              <h3>Hackaccino & Boba</h3>
-              <p>Created 3D web experiences in exchange for tasty rewards</p>
               <div class="project-meta">
-                <span class="project-type">YSWS Program</span>
-                <a href="https://hackclub.com/workshops" class="button">View Gallery</a>
+<!--            <span class="project-date">2023-2024</span> -->
+                <span class="project-category">YSWS Program</span>
               </div>
             </div>
+            <h3>Boba</h3>
+            <p>Build a website and get boba!</p>
+            <div class="project-links">
+              <a href="https://boba.hackclub.com" class="button small">Website</a>
+              <a href="https://hack.club/boba-workshop" class="button small outline">Apply</a>
+            </div>
           </article>
-
-          <!-- Future Projects -->
+          <article class="project-card past">
+            <div class="project-header">
+              <span class="project-status past">Completed</span>
+              <div class="project-meta">
+<!--            <span class="project-date">2023-2024</span> -->
+                <span class="project-category">YSWS Program</span>
+              </div>
+            </div>
+            <h3>Hackaccino</h3>
+            <p>Build a 3D website and get a free frappuccino.</p>
+            <div class="project-links">
+              <a href="https://fraps.hackclub.com" class="button small">Website</a>
+            </div>
+          </article>
+          <article class="project-card past">
+            <div class="project-header">
+              <span class="project-status past">Completed</span>
+              <div class="project-meta">
+<!--            <span class="project-date">2023-2024</span> -->
+                <span class="project-category">YSWS Program</span>
+              </div>
+            </div>
+            <h3>Sprig</h3>
+            <p>Build a JS game and play it on your own console.</p>
+            <div class="project-links">
+              <a href="https://sprig.hackclub.com" class="button small">Website</a>
+              <a href="https://sprig.hackclub.com/~/new-game" class="button small outline">Apply</a>
+            </div>
+          </article>
+          <article class="project-card current">
+            <div class="project-header">
+              <span class="project-status current">Active</span>
+              <div class="project-meta">
+<!--            <span class="project-date">2023-2024</span> -->
+                <span class="project-category">YSWS Program</span>
+              </div>
+            </div>
+            <h3>BakeBuild</h3>
+            <p>Design a cookie cutter, get it shipped!</p>
+            <div class="project-links">
+              <a href="https://bakebuild.hackclub.com" class="button small">Website</a>
+              <a href="https://airtable.com/apphIjW8QTCISm6tv/pagXLkgh6iPYS2hpD/form" class="button small outline">Apply</a>
+            </div>
+          </article>
+          <article class="project-card current">
+            <div class="project-header">
+              <span class="project-status current">Active</span>
+              <div class="project-meta">
+<!--            <span class="project-date">2023-2024</span> -->
+                <span class="project-category">YSWS Program</span>
+              </div>
+            </div>
+            <h3>Swirl</h3>
+            <p>Create a quality website with Scoops, get ice cream!</p>
+            <div class="project-links">
+              <a href="https://swirl.hackclub.com" class="button small">Website</a>
+              <a href="https://forms.hackclub.com/t/apSMwHfWt2us" class="button small outline">Apply</a>
+            </div>
+          </article>
+          <article class="project-card current">
+            <div class="project-header">
+              <span class="project-status current">Active</span>
+              <div class="project-meta">
+<!--            <span class="project-date">2023-2024</span> -->
+                <span class="project-category">YSWS Program</span>
+              </div>
+            </div>
+            <h3>Visioneer</h3>
+            <p>Give your computer the gift of vision, get an esp32-s3-eye to see it through!</p>
+            <div class="project-links">
+              <a href="https://visioneer.hackclub.com" class="button small">Website</a>
+              <a href="https://forms.hackclub.com/visioneer" class="button small outline">Apply</a>
+            </div>
+          </article>
           <article class="project-card future">
-            <div class="project-image">
-              <img src="https://assets.hackclub.com/onboard.png" alt="Onboard">
-            </div>
-            <div class="project-content">
-              <span class="project-status future">Coming Soon</span>
-              <h3>Onboard & Infill</h3>
-              <p>Next-gen member onboarding system with 3D printing rewards</p>
+            <div class="project-header">
+              <span class="project-status future">Future</span>
               <div class="project-meta">
-                <span class="project-type">YSWS Program</span>
-                <a href="#" class="button">Preview</a>
+<!--            <span class="project-date">2023-2024</span> -->
+                <span class="project-category">YSWS Program</span>
               </div>
+            </div>
+            <h3>OnBoard</h3>
+            <p>Design a PCB and we'll fabricate it for you.</p>
+            <div class="project-links">
+              <a href="https://hackclub.com/onboard" class="button small">Website</a>
+              <a href="https://github.com/hackclub/OnBoard/blob/main/README.md" class="button small outline">Apply</a>
             </div>
           </article>
 
-          <!-- Add more project cards following the same structure -->
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section">
-      <div class="container">
-        <h2>Ready to Ship Your Project?</h2>
-        <p>Follow these steps to get started:</p>
-        <div class="process-steps">
-          <div class="step">
-            <div class="step-number">1</div>
-            <h3>Build Something</h3>
-            <p>Create a project using any technology stack</p>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <h3>Share Your Work</h3>
-            <p>Post in #scrapbook on our Slack</p>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <h3>Get Rewards</h3>
-            <p>Receive awesome Hack Club swag</p>
-          </div>
         </div>
       </div>
     </section>

@@ -800,3 +800,91 @@ input:checked + .slider:before {
   justify-content: center;
   margin: 0 auto 1rem;
 }
+
+/* Projects Timeline */
+.project-timeline {
+  padding: 4rem 0;
+}
+
+.timeline-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.project-card {
+  background: var(--elevated);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.project-status {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.project-status.current {
+  background: var(--orange);
+  color: var(--black);
+}
+
+.project-status.past {
+  background: var(--green);
+  color: var(--black);
+}
+
+.project-status.future {
+  background: var(--red);
+  color: var(--black);
+}
+
+.project-meta {
+  text-align: right;
+}
+
+.project-date {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.project-category {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.project-links {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.button.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Color Variables */
+:root {
+  --orange: #ff8c37;
+  --green: #33d6a6;
+  --purple: #7928ca;
+  --text-muted: #8492a6;
+}

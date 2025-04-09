@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply to Phoenix Club</title>
+  <link rel="stylesheet" href="https://css.hackclub.com/theme.css">
+  <link rel="stylesheet" href="https://css.hackclub.com/fonts.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="https://hackclub.com/" class="flag">
+    <img src="https://assets.hackclub.com/flag-orpheus-left.svg" alt="Hack Club" />
+  </a>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo-container">
+        <img src="images/logo.png" alt="Phoenix Club" id="logo">
+        <span>Phoenix Club</span>
+      </a>
+      <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="https://hcb.hackclub.com/phoenix" target="_blank">Finances</a></li>
+            <li><a href="apply.html" class="active">Apply</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+      </nav>
+      <div class="language-toggle">
+        <span>EN</span>
+        <label class="switch">
+          <input type="checkbox" id="languageToggle">
+          <span class="slider"></span>
+        </label>
+        <span>RO</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Join Phoenix Club</h1>
+        <p>Start your coding journey with us</p>
+      </div>
+    </section>
+
+    <section class="application-form">
+      <div class="container">
+        <form netlify class="form-grid" style="--gap: 1.5rem">
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="school">School *</label>
+              <input type="text" id="school" name="school" required>
+            </div>
+            <div class="form-group">
+              <label for="class">Class *</label>
+              <input type="number" id="class" name="class" min="9" max="12" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="birthdate">Date of Birth *</label>
+              <input type="date" id="birthdate" name="birthdate" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="discord">Discord Username *</label>
+              <input type="text" id="discord" name="discord" required>
+            </div>
+            <div class="form-group">
+              <label for="id">Student ID *</label>
+              <input type="text" id="id" name="id" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="superpowers">Describe yourself and your superpowers *</label>
+            <textarea 
+              id="superpowers" 
+              name="superpowers" 
+              rows="4" 
+              placeholder="What makes you unique? What technical/non-technical skills do you have?"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="button primary">Submit Application</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/logo.png" alt="Phoenix Club">
+          <p>Phoenix Coding Club</p>
+        </div>
+        <div class="footer-links">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="apply.html">Apply</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="team.html">Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://hackclub.com/" target="_blank">Hack Club</a></li>
+            <li><a href="https://hcb.hackclub.com/phoenix" target="_blank">Finances</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Phoenix Club is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN: 81-2908499)</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

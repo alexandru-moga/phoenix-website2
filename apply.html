@@ -49,12 +49,10 @@
     
         <section class="application-form">
           <form id="applicationForm" class="form-grid">
-            <!-- Form fields -->
             <div class="form-group">
                 <label for="email">Email Address *</label>
                 <input type="email" id="email" name="email" required>
               </div>
-    
               <div class="form-row">
                 <div class="form-group">
                   <label for="first_name">First Name *</label>
@@ -65,7 +63,6 @@
                   <input type="text" id="last_name" name="last_name" required>
                 </div>
               </div>
-    
               <div class="form-row">
                 <div class="form-group">
                   <label for="school">School *</label>
@@ -73,28 +70,17 @@
                 </div>
                 <div class="form-group">
                   <label for="class">Class *</label>
-                  <input type="number" id="class" name="class" min="9" max="12" required>
+                  <input type="text" id="class" name="class" required>
                 </div>
               </div>
-    
-              <div class="form-row">
                 <div class="form-group">
                   <label for="birthdate">Date of Birth *</label>
                   <input type="date" id="birthdate" name="birthdate" required>
                 </div>
-                <div class="form-group">
-                  <label for="phone">Phone Number *</label>
-                  <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="discord_username">Discord Username *</label>
-                  <input type="text" id="discord_username" name="discord_username" required>
-                </div>
-                <div class="form-group">
-                  <label for="student_id">Student ID *</label>
-                  <input type="text" id="student_id" name="student_id" required>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Please enter a valid phone number (only digits and + are allowed)." pattern="^[+0-9]+$" required>
                 </div>
               </div>
               <div class="form-group">
@@ -107,13 +93,12 @@
                   required
                 ></textarea>
               </div>
-    
             <button type="submit" class="button primary">Submit Application</button>
             <div id="formMessage" class="form-message"></div>
           </form>
+          <span class="requirements">* Required</span>
         </section>
       </main>
-    
       <script>
         document.getElementById('applicationForm').addEventListener('submit', async (e) => {
           e.preventDefault();

@@ -918,3 +918,8 @@ input:checked + .slider:before {
 .form-message.visible {
   display: block;
 }
+
+.requirements {
+  color: #ec3750;
+  font-size: 0.875rem;
+}

@@ -868,9 +868,8 @@ input:checked + .slider:before {
   --text-muted: #8492a6;
 }
 
-/* Update the application form container styling */
 .application-form .container {
-  max-width: 800px; /* Control the width to match contact form */
+  max-width: 800px;
 }
 
 .application-form form {
@@ -881,7 +880,6 @@ input:checked + .slider:before {
   margin: 0 auto;
 }
 
-/* Style the form inputs to match contact form */
 .application-form input,
 .application-form textarea {
   background-color: rgba(255, 255, 255, 0.1);
@@ -892,7 +890,6 @@ input:checked + .slider:before {
   font-family: inherit;
 }
 
-/* Style the submit button to match contact form */
 .application-form button[type="submit"] {
   background-color: var(--primary);
   color: white;
@@ -904,4 +901,15 @@ input:checked + .slider:before {
 
 .application-form button[type="submit"]:hover {
   background-color: #d9304a;
+}
+
+.form-message {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  display: none;
+}
+
+.form-message.visible {
+  display: block;
 }

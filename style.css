@@ -923,3 +923,20 @@ input:checked + .slider:before {
   color: #ec3750;
   font-size: 0.875rem;
 }
+
+.auth-section {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--elevated);
+  border-radius: 8px;
+}
+
+.auth-section h2 {
+  margin-bottom: 1.5rem;
+}
+
+.auth-section input {
+  width: 100%;
+  margin-bottom: 1rem;
+}

@@ -7,12 +7,7 @@
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="https://css.hackclub.com/theme.css">
   <link rel="stylesheet" href="https://css.hackclub.com/fonts.css">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Added projects.css for slider animations -->
-  <link rel="stylesheet" href="/css/projects.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a href="https://hackclub.com/" class="flag">
@@ -48,15 +43,6 @@
     </div>
   </section>
   <main>
-    <div class="language-toggle">
-        <span>EN</span>
-        <label class="switch">
-        <input type="checkbox" id="languageToggle">
-        <span class="slider"></span>
-        </label>
-        <span>RO</span>
-    </div>
-
     <section class="about">
       <div class="container">
         <h2>Who We Are</h2>
@@ -71,39 +57,28 @@
     <section class="highlights">
       <div class="container">
         <h2>Latest Events</h2>
-        <!-- Inserted slider container markup from projects.html -->
-        <div id="project-slider" class="timeline-grid">
-          <article class="project-card past">
-            <div class="project-header">
-              <span class="project-status past">Completed</span>
-              <div class="project-meta">
-                <span class="project-category">Event</span>
-              </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-content">
+              <h3>Robotics Workshop</h3>
+              <p>Our latest Arduino automation series teaching students how to build and program robots.</p>
+              <a href="projects.html" class="card-link">Learn more →</a>
             </div>
-            <h3>Event One</h3>
-            <p>Description for Event One.</p>
-          </article>
-          <article class="project-card current">
-            <div class="project-header">
-              <span class="project-status current">Ongoing</span>
-              <div class="project-meta">
-                <span class="project-category">Event</span>
-              </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <h3>Web Development Jam</h3>
+              <p>A weekend hackathon focused on creating responsive and accessible websites.</p>
+              <a href="projects.html" class="card-link">Learn more →</a>
             </div>
-            <h3>Event Two</h3>
-            <p>Description for Event Two.</p>
-          </article>
-          <article class="project-card future">
-            <div class="project-header">
-              <span class="project-status future">Upcoming</span>
-              <div class="project-meta">
-                <span class="project-category">Event</span>
-              </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <h3>Game Design Competition</h3>
+              <p>Students compete to design innovative games using modern frameworks.</p>
+              <a href="projects.html" class="card-link">Learn more →</a>
             </div>
-            <h3>Event Three</h3>
-            <p>Description for Event Three.</p>
-          </article>
-          <!-- Duplicate articles if needed for seamless looping -->
+          </div>
         </div>
       </div>
     </section>
@@ -132,14 +107,14 @@
             <li><a href="https://hcb.hackclub.com/phoenix" target="_blank">Our Finances</a></li>
             <li><a href="https://hackclub.com/slack" target="_blank">Join Slack</a></li>
           </ul>
-        </div> 
+        </div>
       </div>
       <div class="footer-bottom">
         <p>Phoenix Club is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN: 81-2908499)</p>
       </div>
     </div>
   </footer>
-  <!-- Added projects script for animations -->
-  <script src="/scripts/script.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>

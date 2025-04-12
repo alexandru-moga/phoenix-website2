@@ -18,23 +18,26 @@
             <h2>Phoenix Club Login</h2>
             
             <div id="auth-flow">
+                <!-- Email Form -->
                 <form id="email-form">
                     <div class="form-group">
                         <input type="email" id="email" placeholder="Your email" required>
                     </div>
-                    <button type="submit" class="button">Continue</button>
+                    <button type="submit" class="button">Send Login Code</button>
                 </form>
 
-                <div id="totp-section" style="display: none;">
-                    <div id="qr-container"></div>
-                    <p class="manual-code">Or enter code manually: <span id="manual-code"></span></p>
-                    
-                    <form id="totp-form">
+                <!-- Code Form (hidden initially) -->
+                <div id="code-form" style="display: none;">
+                    <p>Enter the 6-digit code sent to your email</p>
+                    <form id="verify-form">
                         <div class="form-group">
-                            <input type="text" id="totp-code" placeholder="6-digit code" required>
+                            <input type="text" id="code" placeholder="123456" required maxlength="6">
                         </div>
-                        <button type="submit" class="button">Verify</button>
+                        <button type="submit" class="button">Verify Code</button>
                     </form>
+                    <p class="switch-form-link">
+                        <a href="#" id="change-email">Use different email</a>
+                    </p>
                 </div>
 
                 <div id="auth-message" class="form-message"></div>
@@ -48,72 +51,75 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const API_BASE = 'https://api.phoenixclub.ro';
-      let currentEmail = '';
+        const API_BASE = 'https://api.phoenixclub.ro';
+        let currentEmail = '';
 
-      // Email submission
-      document.getElementById('email-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        currentEmail = document.getElementById('email').value;
-        const messageEl = document.getElementById('auth-message');
-
-        try {
-          const response = await fetch(`${API_BASE}/api/auth/start-auth`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: currentEmail })
-          });
-
-          const data = await response.json();
-
-          if (data.success) {
-            document.getElementById('email-form').style.display = 'none';
-            document.getElementById('totp-section').style.display = 'block';
+        // Email submission
+        document.getElementById('email-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const messageEl = document.getElementById('auth-message');
+            messageEl.textContent = '';
             
-            // Display QR Code
-            const qrImg = document.createElement('img');
-            qrImg.src = data.qrCode;
-            qrImg.alt = 'TOTP QR Code';
-            document.getElementById('qr-container').appendChild(qrImg);
-            
-            // Display manual code
-            document.getElementById('manual-code').textContent = data.manualCode;
-          } else {
-            messageEl.textContent = data.message;
-          }
-        } catch (error) {
-          messageEl.textContent = 'Connection error. Please try again.';
-        }
-      });
+            currentEmail = email;
 
-      // TOTP verification
-      document.getElementById('totp-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const code = document.getElementById('totp-code').value;
-        const messageEl = document.getElementById('auth-message');
+            try {
+                const response = await fetch(`${API_BASE}/api/auth/initiate-login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
 
-        try {
-          const response = await fetch(`${API_BASE}/api/auth/verify-totp`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: currentEmail,
-              code: code
-            })
-          });
+                const data = await response.json();
 
-          const data = await response.json();
+                if (data.success) {
+                    document.getElementById('email-form').style.display = 'none';
+                    document.getElementById('code-form').style.display = 'block';
+                } else {
+                    messageEl.textContent = data.message || 'Failed to send code';
+                }
+            } catch (error) {
+                messageEl.textContent = 'Connection error. Please try again.';
+            }
+        });
 
-          if (data.success) {
-            localStorage.setItem('phoenixToken', data.token);
-            window.location.href = '/dashboard.html';
-          } else {
-            messageEl.textContent = data.message;
-          }
-        } catch (error) {
-          messageEl.textContent = 'Verification failed. Please try again.';
-        }
-      });
+        // Code verification
+        document.getElementById('verify-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const code = document.getElementById('code').value;
+            const messageEl = document.getElementById('auth-message');
+            messageEl.textContent = 'Verifying...';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/auth/verify-login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: currentEmail,
+                        code: code
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    localStorage.setItem('phoenixToken', data.token);
+                    window.location.href = '/dashboard.html';
+                } else {
+                    messageEl.textContent = data.message || 'Verification failed';
+                }
+            } catch (error) {
+                messageEl.textContent = 'Connection error. Please try again.';
+            }
+        });
+
+        // Change email handler
+        document.getElementById('change-email').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('code-form').style.display = 'none';
+            document.getElementById('email-form').style.display = 'block';
+            document.getElementById('auth-message').textContent = '';
+        });
     });
     </script>
 </body>

@@ -940,3 +940,48 @@ input:checked + .slider:before {
   width: 100%;
   margin-bottom: 1rem;
 }
+
+
+.auth-section {
+  max-width: 500px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: var(--elevated);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+
+.auth-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  text-align: center;
+}
+
+.switch-form-link {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.switch-form-link a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.switch-form-link a:hover {
+  text-decoration: underline;
+}
+
+.form-message {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  display: none;
+  text-align: center;
+}
+
+.form-message.visible {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.1);
+}

@@ -1,10 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Add Montserrat font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Phoenix Club</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<form id="loginForm">
-    <input type="email" name="email" placeholder="Your email" required>
-    <input type="text" name="code" placeholder="6-digit code" required>
-    <button type="submit">Login</button>
-  </form>
-  <div id="loginMessage"></div>
+<body>
+    <div class="particles-container" id="particles-js"></div>
+    
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo-container">
+                <img src="images/logo.png" alt="Phoenix Club">
+                <span>Phoenix Club</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html" class="active">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="auth-section">
+        <div class="container">
+            <h2>Login to Phoenix Club</h2>
+            
+            <!-- Email form -->
+            <div id="email-form">
+                <p>Enter your email to receive a login code</p>
+                <form id="send-code-form">
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your email" required>
+                    </div>
+                    <button type="submit" class="button">Get Login Code</button>
+                </form>
+                <p class="switch-form-link">
+                    <a href="#" id="show-code-form">Already have a code?</a>
+                </p>
+                <div id="email-message" class="form-message"></div>
+            </div>
+            
+            <!-- Code form -->
+            <div id="code-form" style="display: none;">
+                <p>Enter the code sent to your email</p>
+                <form id="verify-code-form">
+                    <div class="form-group">
+                        <input type="hidden" id="code-email" name="email">
+                        <input type="text" id="code" name="code" placeholder="Enter 6-digit code" required>
+                    </div>
+                    <button type="submit" class="button">Verify Code</button>
+                </form>
+                <p class="switch-form-link">
+                    <a href="#" id="back-to-email">Send code to a different email</a>
+                </p>
+                <div id="code-message" class="form-message"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <!-- Footer content unchanged -->
+        </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const API_BASE = 'https://api.phoenixclub.ro';
+          const emailForm = document.getElementById('email-form');
+          const codeForm = document.getElementById('code-form');
+          const sendCodeForm = document.getElementById('send-code-form');
+          const verifyCodeForm = document.getElementById('verify-code-form');
+          const emailMessage = document.getElementById('email-message');
+          const codeMessage = document.getElementById('code-message');
+          const codeEmailField = document.getElementById('code-email');
+      
+          // Form visibility controls
+          document.getElementById('show-code-form').addEventListener('click', (e) => {
+              e.preventDefault();
+              emailForm.style.display = 'none';
+              codeForm.style.display = 'block';
+          });
+      
+          document.getElementById('back-to-email').addEventListener('click', (e) => {
+              e.preventDefault();
+              codeForm.style.display = 'none';
+              emailForm.style.display = 'block';
+          });
+      
+          // Send code form handler
+          sendCodeForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const email = document.getElementById('email').value;
+              emailMessage.textContent = 'Sending login code...';
+              emailMessage.className = 'form-message visible';
+      
+              try {
+                  const response = await fetch(`${API_BASE}/api/auth/send-code`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ email })
+                  });
+      
+                  const contentType = response.headers.get('content-type');
+                  if (!contentType || !contentType.includes('application/json')) {
+                      throw new Error('Invalid server response');
+                  }
+      
+                  const data = await response.json();
+                  
+                  if (response.ok) {
+                      emailMessage.textContent = 'Login code sent! Check your email.';
+                      codeEmailField.value = email;
+                      emailForm.style.display = 'none';
+                      codeForm.style.display = 'block';
+                  } else {
+                      emailMessage.textContent = data.message || 'Failed to send code';
+                  }
+              } catch (error) {
+                  emailMessage.textContent = 'Connection error. Please try again.';
+                  console.error('Send code error:', error);
+              }
+          });
+      
+          // Verify code form handler
+          verifyCodeForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const email = codeEmailField.value;
+              const code = document.getElementById('code').value;
+              codeMessage.textContent = 'Verifying code...';
+              codeMessage.className = 'form-message visible';
+      
+              try {
+                  const response = await fetch(`${API_BASE}/api/auth/verify-code`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ email, code })
+                  });
+      
+                  const contentType = response.headers.get('content-type');
+                  if (!contentType || !contentType.includes('application/json')) {
+                      throw new Error('Invalid server response');
+                  }
+      
+                  const data = await response.json();
+      
+                  if (response.ok) {
+                      localStorage.setItem('authToken', data.token);
+                      window.location.href = '/dashboard.html';
+                  } else {
+                      codeMessage.textContent = data.message || 'Invalid verification code';
+                  }
+              } catch (error) {
+                  codeMessage.textContent = 'Connection error. Please try again.';
+                  console.error('Verify code error:', error);
+              }
+          });
+      
+          // Handle auto-login URL parameters
+          const urlParams = new URLSearchParams(window.location.search);
+          const autoEmail = urlParams.get('email');
+          const autoCode = urlParams.get('code');
+      
+          if (autoEmail && autoCode) {
+              codeEmailField.value = autoEmail;
+              document.getElementById('code').value = autoCode;
+              emailForm.style.display = 'none';
+              codeForm.style.display = 'block';
+              verifyCodeForm.dispatchEvent(new Event('submit'));
+          }
+      });
+      </script>
+</body>
+</html>

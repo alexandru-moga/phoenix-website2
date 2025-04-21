@@ -4,69 +4,79 @@
   <meta charset="UTF-8">
   <title>Phoenix Club – Our Team</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo-container">
+        <img src="/images/phoenix-logo.png" alt="Phoenix Club Logo">
+        <span>Phoenix Club</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/" >Home</a></li>
+          <li><a href="/team.html" class="active">Team</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <section class="page-header">
     <h1>Our Team</h1>
     <p>Meet the amazing people behind Phoenix</p>
   </section>
 
   <div class="container">
-    <div class="member-grid" id="teamContainer">
-      <!-- Dynamic content will be injected here -->
+    <div id="teamContainer" class="member-grid">
+      <!-- Team members will be loaded here -->
     </div>
   </div>
 
+  <footer>
+    <div class="footer-content container">
+      <div class="footer-logo">
+        <img src="/images/phoenix-logo.png" alt="Phoenix Club Logo">
+        <span>Phoenix Club</span>
+      </div>
+      <div class="footer-links">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/team.html">Team</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Phoenix Club. All rights reserved.
+    </div>
+  </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      const container = document.getElementById('teamContainer');
-      try {
-        const response = await fetch('/api/team-members');
-        const members = await response.json();
-
-        if (!Array.isArray(members) || members.length === 0) {
-          container.innerHTML = '<p>No team members found.</p>';
-          return;
-        }
-
-        // Group by role
-        const leaders = members.filter(m => m.role && m.role.toLowerCase().includes('leader'));
-        const others = members.filter(m => !m.role || !m.role.toLowerCase().includes('leader'));
-
-        let html = '';
-
-        if (leaders.length) {
-          html += `<h2>Leadership</h2><div class="member-grid">`;
-          html += leaders.map(m => `
-            <div class="member-card">
-              <img src="${m.img}" alt="${m.first_name} ${m.last_name}">
-              <h3>${m.first_name} ${m.last_name}</h3>
-              <div class="member-role">${m.role || ''}</div>
-              <div class="member-description">${m.description || ''}</div>
-            </div>
-          `).join('');
-          html += `</div>`;
-        }
-
-        if (others.length) {
-          html += `<h2>Members</h2><div class="member-grid">`;
-          html += others.map(m => `
-            <div class="member-card">
-              <img src="${m.img}" alt="${m.first_name} ${m.last_name}">
-              <h3>${m.first_name} ${m.last_name}</h3>
-              <div class="member-role">${m.role || ''}</div>
-              <div class="member-description">${m.description || ''}</div>
-            </div>
-          `).join('');
-          html += `</div>`;
-        }
-
-        container.innerHTML = html;
-      } catch (err) {
-        container.innerHTML = '<p class="error">Failed to load team members. Please try again later.</p>';
-        console.error(err);
-      }
+  const container = document.getElementById('teamContainer');
+  try {
+    const response = await fetch('https://api.phoenixclub.ro/api/team-members', {
+      mode: 'cors',
+      credentials: 'same-origin'
     });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const members = await response.json();
+    
+    // Rest of your rendering code...
+  } catch (err) {
+    console.error('Fetch Error:', err);
+    container.innerHTML = '<p class="error">Failed to load team members. Please try again later.</p>';
+  }
+});
   </script>
 </body>
 </html>

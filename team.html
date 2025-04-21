@@ -9,19 +9,16 @@
 <body>
   <header>
     <div class="container">
-      <a href="index.html" class="logo-container">
-        <img src="images/logo.png" alt="Phoenix Club" id="logo">
+      <a href="/" class="logo-container">
+        <img src="/images/phoenix-logo.png" alt="Phoenix Club Logo">
         <span>Phoenix Club</span>
       </a>
       <nav>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="team.html" class="active">Team</a></li>
-          <li><a href="https://hcb.hackclub.com/phoenix" target="_blank">Finances</a></li>
-          <li><a href="apply.html">Apply</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/team.html" class="active">Team</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -35,63 +32,76 @@
   <div class="container">
     <div id="teamContainer" class="member-grid">
       <!-- Team members will be loaded here -->
+      <p id="loadingMessage">Loading team members...</p>
     </div>
   </div>
 
   <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-            <img src="images/logo.png" alt="Phoenix Club">
-            <p>Phoenix Coding Club</p>
-        </div>
-        <div class="footer-links">
-          <h4>Pages</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="https://hackclub.com/" target="_blank">Hack Club</a></li>
-            <li><a href="https://hcb.hackclub.com/phoenix" target="_blank">Our Finances</a></li>
-            <li><a href="https://hackclub.com/slack" target="_blank">Join Slack</a></li>
-          </ul>
-        </div>
+    <div class="footer-content container">
+      <div class="footer-logo">
+        <img src="/images/phoenix-logo.png" alt="Phoenix Club Logo">
+        <span>Phoenix Club</span>
       </div>
-      <div class="footer-bottom">
-        <p>Phoenix Club is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN: 81-2908499)</p>
+      <div class="footer-links">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/team.html">Team</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
       </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Phoenix Club. All rights reserved.
     </div>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       const container = document.getElementById('teamContainer');
+      const loadingMessage = document.getElementById('loadingMessage');
+      
       try {
-        const response = await fetch('https://api.phoenixclub.ro/api/team-members');
-        if (!response.ok) throw new Error('Failed to fetch team members');
+        // Fetch team members from API
+        const response = await fetch('https://api.phoenixclub.ro/api/team-members', {
+          method: 'GET',
+          credentials: 'omit',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`API returned status: ${response.status}`);
+        }
+        
         const members = await response.json();
-        if (!Array.isArray(members) || members.length === 0) {
+        loadingMessage.remove();
+        
+        // If no members are returned, show a message
+        if (!members || members.length === 0) {
           container.innerHTML = '<p>No active team members found.</p>';
           return;
         }
-        container.innerHTML = members.map(member => `
+        
+        // Otherwise, display the members
+        const membersHTML = members.map(member => `
           <div class="member-card">
-            <img src="${member.img}" alt="${member.first_name} ${member.last_name}" onerror="this.onerror=null;this.src='/images/team/default.jpg';">
+            <img src="${member.img}" alt="${member.first_name} ${member.last_name}" 
+                 onerror="this.onerror=null; this.src='/images/team/default.jpg';">
             <h3>${member.first_name} ${member.last_name}</h3>
-            <div class="member-role">${member.role ? member.role : ''}</div>
+            <div class="member-role">${member.role || ''}</div>
           </div>
         `).join('');
-      } catch (err) {
+        
+        container.innerHTML = membersHTML;
+        
+      } catch (error) {
+        console.error('Error loading team members:', error);
         container.innerHTML = '<p class="error">Failed to load team members. Please try again later.</p>';
-        console.error(err);
       }
     });
-    </script>
+  </script>
 </body>
 </html>

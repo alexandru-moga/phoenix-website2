@@ -1,10 +1,17 @@
 RewriteEngine On
 
-# Redirect .html URLs to clean URLs
-RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
-RewriteRule ^ /%1 [NC,L,R=301]
-
-# Internally rewrite clean URLs to .html files
+# Redirect URLs ending with .html to the version without .html
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^([^/]+)$ $1.html [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+# Internally rewrite extensionless URLs to their .html counterparts if the .html file exists
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# Custom rule: If user goes to /projects, serve projects.html
+RewriteRule ^projects$ projects.html [L]
+
+# Custom 404 error page
+ErrorDocument 404 /404.html

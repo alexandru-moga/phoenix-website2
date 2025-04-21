@@ -71,25 +71,27 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-  const container = document.getElementById('teamContainer');
-  try {
-    const response = await fetch('https://api.phoenixclub.ro/api/team-members', {
-      mode: 'cors',
-      credentials: 'same-origin'
+      const container = document.getElementById('teamContainer');
+      try {
+        const response = await fetch('https://api.phoenixclub.ro/api/team-members');
+        if (!response.ok) throw new Error('Failed to fetch team members');
+        const members = await response.json();
+        if (!Array.isArray(members) || members.length === 0) {
+          container.innerHTML = '<p>No active team members found.</p>';
+          return;
+        }
+        container.innerHTML = members.map(member => `
+          <div class="member-card">
+            <img src="${member.img}" alt="${member.first_name} ${member.last_name}" onerror="this.onerror=null;this.src='/images/team/default.jpg';">
+            <h3>${member.first_name} ${member.last_name}</h3>
+            <div class="member-role">${member.role ? member.role : ''}</div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<p class="error">Failed to load team members. Please try again later.</p>';
+        console.error(err);
+      }
     });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    const members = await response.json();
-    
-    // Rest of your rendering code...
-  } catch (err) {
-    console.error('Fetch Error:', err);
-    container.innerHTML = '<p class="error">Failed to load team members. Please try again later.</p>';
-  }
-});
-  </script>
+    </script>
 </body>
 </html>

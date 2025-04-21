@@ -1,17 +1,17 @@
 // dashboard.js
 
-// Utility: Get token from localStorage
+// Utility: Get JWT from localStorage
 function getToken() {
     return localStorage.getItem('token');
   }
   
-  // Utility: Remove token and redirect to login
+  // Utility: Remove JWT and redirect to login
   function logout() {
     localStorage.removeItem('token');
     window.location.href = '/login.html';
   }
   
-  // Check authentication before showing dashboard
+  // Show dashboard only if token is valid
   document.addEventListener('DOMContentLoaded', () => {
     const token = getToken();
     if (!token) {
@@ -19,19 +19,19 @@ function getToken() {
       return;
     }
   
-    // Optionally: Validate token with a backend endpoint
+    // Validate token with backend (recommended)
     fetch('/api/auth/me', {
       headers: {
         'Authorization': 'Bearer ' + token
       }
     })
       .then(res => {
-        if (!res.ok) throw new Error('Invalid token');
+        if (!res.ok) throw new Error('Invalid or expired token');
         return res.json();
       })
       .then(user => {
-        // Show dashboard only after successful auth
-        document.getElementById('dashboard-body').style.display = '';
+        // Show dashboard after successful validation
+        document.body.style.display = '';
         renderUserInfo(user);
         fetchProjects(token);
       })
@@ -39,17 +39,21 @@ function getToken() {
         logout();
       });
   
-    // Logout button
-    document.getElementById('logout-btn').addEventListener('click', logout);
+    // Attach logout handler
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', logout);
+    }
   });
   
-  // Render user info
+  // Render user info section
   function renderUserInfo(user) {
     const userInfoDiv = document.getElementById('user-info');
-    userInfoDiv.innerHTML = `
-      <p><strong>Email:</strong> ${user.email}</p>
-      <p><strong>Name:</strong> ${user.name || ''}</p>
-    `;
+    if (userInfoDiv) {
+      userInfoDiv.innerHTML = `
+        <p><strong>Email:</strong> ${user.email || user.userId || ''}</p>
+      `;
+    }
   }
   
   // Fetch and render projects
@@ -65,15 +69,18 @@ function getToken() {
       })
       .then(projects => {
         const list = document.getElementById('projects-list');
-        list.innerHTML = '';
-        projects.forEach(project => {
-          const li = document.createElement('li');
-          li.textContent = `${project.name} (${project.status})`;
-          list.appendChild(li);
-        });
+        if (list) {
+          list.innerHTML = '';
+          projects.forEach(project => {
+            const li = document.createElement('li');
+            li.textContent = `${project.name} (${project.status})`;
+            list.appendChild(li);
+          });
+        }
       })
-      .catch(err => {
-        document.getElementById('projects-list').innerHTML = '<li>Error loading projects.</li>';
+      .catch(() => {
+        const list = document.getElementById('projects-list');
+        if (list) list.innerHTML = '<li>Error loading projects.</li>';
       });
   }
   

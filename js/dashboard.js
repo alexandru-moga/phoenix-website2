@@ -1,86 +1,59 @@
-// dashboard.js
-
-// Utility: Get JWT from localStorage
-function getToken() {
-    return localStorage.getItem('token');
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  // Immediately hide dashboard body
+  document.body.style.display = 'none';
   
-  // Utility: Remove JWT and redirect to login
-  function logout() {
-    localStorage.removeItem('token');
+  // Check authentication status
+  fetch('/api/auth/me', { 
+    credentials: 'include' // Required for cookies
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Unauthorized');
+    return res.json();
+  })
+  .then(user => {
+    // Show dashboard after successful auth
+    document.body.style.display = '';
+    renderUserInfo(user);
+    fetchProjects();
+  })
+  .catch(() => {
     window.location.href = '/login.html';
-  }
-  
-  // Show dashboard only if token is valid
-  document.addEventListener('DOMContentLoaded', () => {
-    const token = getToken();
-    if (!token) {
-      logout();
-      return;
-    }
-  
-    // Validate token with backend (recommended)
-    fetch('/api/auth/me', {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-      .then(res => {
-        if (!res.ok) throw new Error('Invalid or expired token');
-        return res.json();
-      })
-      .then(user => {
-        // Show dashboard after successful validation
-        document.body.style.display = '';
-        renderUserInfo(user);
-        fetchProjects(token);
-      })
-      .catch(() => {
-        logout();
-      });
-  
-    // Attach logout handler
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', logout);
-    }
   });
-  
-  // Render user info section
-  function renderUserInfo(user) {
-    const userInfoDiv = document.getElementById('user-info');
-    if (userInfoDiv) {
-      userInfoDiv.innerHTML = `
-        <p><strong>Email:</strong> ${user.email || user.userId || ''}</p>
-      `;
+
+  // Logout handler
+  document.getElementById('logout-btn')?.addEventListener('click', () => {
+    fetch('/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include'
+    }).then(() => window.location.href = '/login.html');
+  });
+});
+
+function renderUserInfo(user) {
+  const userInfoDiv = document.getElementById('user-info');
+  if (userInfoDiv) {
+    userInfoDiv.innerHTML = `<p>Logged in as: ${user.email}</p>`;
+  }
+}
+
+function fetchProjects() {
+  fetch('/api/projects', {
+    credentials: 'include'
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to fetch projects');
+    return res.json();
+  })
+  .then(projects => {
+    const list = document.getElementById('projects-list');
+    if (list) {
+      list.innerHTML = projects.map(project => 
+        `<li>${project.name} (${project.status})</li>`
+      ).join('');
     }
-  }
-  
-  // Fetch and render projects
-  function fetchProjects(token) {
-    fetch('/api/projects', {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch projects');
-        return res.json();
-      })
-      .then(projects => {
-        const list = document.getElementById('projects-list');
-        if (list) {
-          list.innerHTML = '';
-          projects.forEach(project => {
-            const li = document.createElement('li');
-            li.textContent = `${project.name} (${project.status})`;
-            list.appendChild(li);
-          });
-        }
-      })
-      .catch(() => {
-        const list = document.getElementById('projects-list');
-        if (list) list.innerHTML = '<li>Error loading projects.</li>';
-      });
-  }
-  
+  })
+  .catch(error => {
+    console.error('Project load error:', error);
+    document.getElementById('projects-list').innerHTML = '<li>Error loading projects</li>';
+  });
+}
